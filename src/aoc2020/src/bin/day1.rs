@@ -1,7 +1,7 @@
 use aoc_attributes::aoc_main;
 use itertools::Itertools;
 
-static INPUT: &str = include_str!("../../input/2020/day1.txt");
+static INPUT: &str = include_str!("../../input/day1.txt");
 
 #[aoc_main(year = 2020, day = 1, part1 = "part1", part2 = "part2")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {

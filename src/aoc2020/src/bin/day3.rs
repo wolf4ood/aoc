@@ -1,6 +1,6 @@
 use aoc_attributes::aoc_main;
 
-static INPUT: &str = include_str!("../../input/2020/day3.txt");
+static INPUT: &str = include_str!("../../input/day3.txt");
 
 #[aoc_main(year = 2020, day = 3, part1 = "part1", part2 = "part2")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {

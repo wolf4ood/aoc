@@ -3,7 +3,7 @@ use aoc_attributes::aoc_main;
 use itertools::Itertools;
 use std::{collections::HashMap, ops::RangeBounds};
 
-static INPUT: &str = include_str!("../../input/2020/day4.txt");
+static INPUT: &str = include_str!("../../input/day4.txt");
 
 type Validator = dyn Fn(&str) -> bool;
 

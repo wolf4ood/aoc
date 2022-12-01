@@ -2,7 +2,7 @@ use aoc_attributes::aoc_main;
 use itertools::Itertools;
 
 use anyhow::Result;
-static INPUT: &str = include_str!("../../input/2020/day9.txt");
+static INPUT: &str = include_str!("../../input/day9.txt");
 
 #[aoc_main(year = 2020, day = 9, part1 = "part_one", part2 = "part_two")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {

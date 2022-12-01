@@ -10,7 +10,7 @@ use nom::{
     IResult,
 };
 
-static INPUT: &str = include_str!("../../input/2020/day7.txt");
+static INPUT: &str = include_str!("../../input/day7.txt");
 
 #[aoc_main(year = 2020, day = 7, part1 = "part_one", part2 = "part_two")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {

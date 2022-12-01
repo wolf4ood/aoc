@@ -7,7 +7,7 @@ use nom::{
 
 use aoc2020::utils::num_parser;
 
-static INPUT: &str = include_str!("../../input/2020/day2.txt");
+static INPUT: &str = include_str!("../../input/day2.txt");
 
 #[aoc_main(year = 2020, day = 2, part1 = "part1", part2 = "part2")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {

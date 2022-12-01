@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use aoc_attributes::aoc_main;
 
-static INPUT: &str = include_str!("../../input/2020/day6.txt");
+static INPUT: &str = include_str!("../../input/day6.txt");
 
 #[aoc_main(year = 2020, day = 6, part1 = "part_one", part2 = "part_two")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
