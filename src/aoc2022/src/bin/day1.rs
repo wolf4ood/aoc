@@ -12,10 +12,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 pub type ElfScore = BTreeMap<u32, Vec<u32>>;
 pub type ElfAccumulator = (ElfScore, u32, u32);
 
-pub fn input_generator(input: &str) -> Vec<i32> {
-    input.lines().map(|l| l.parse().unwrap()).collect()
-}
-
 pub fn part1() -> u32 {
     groups().iter().rev().map(|item| item.0).take(1).sum()
 }
