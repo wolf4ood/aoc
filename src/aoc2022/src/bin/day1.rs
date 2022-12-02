@@ -32,10 +32,10 @@ fn groups() -> ElfScore {
                 let items = acc.0.entry(acc.1).or_insert_with(Vec::new);
                 items.push(acc.2);
                 acc.1 = 0;
-                acc.2 = acc.2 + 1;
+                acc.2 += 1;
             } else {
                 let n: u32 = item.parse().unwrap();
-                acc.1 = acc.1 + n;
+                acc.1 += n;
             }
             acc
         })

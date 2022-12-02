@@ -8,7 +8,7 @@ fn find_attribute(name: &str, attributes: &AttributeArgs) -> Option<String> {
         .iter()
         .filter_map(|attr| match attr {
             syn::NestedMeta::Meta(Meta::NameValue(named)) => {
-                if named.path.segments.last().expect("Panic").ident.to_string() == name {
+                if named.path.segments.last().expect("Panic").ident == name {
                     match &named.lit {
                         syn::Lit::Str(string) => Some(string.value()),
                         syn::Lit::Int(int) => Some(int.base10_digits().to_string()),
