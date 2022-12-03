@@ -7,3 +7,10 @@ members= [
    "src/aoc2020",
    "src/aoc2022",
 ]
+[workspace.dependencies]
+aoc-attributes = {version="0.1.0", path ="src/aoc-attributes"}
+itertools = "0.9.0"
+nom = "6.0.1"
+once_cell = "1.5.2"
+structopt = "0.3.21"
+anyhow = "1.0.35"
