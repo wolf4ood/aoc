@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 use aoc_attributes::aoc_main;
 use itertools::Itertools;
@@ -36,19 +36,18 @@ pub fn part2() -> u32 {
         .lines()
         .chunks(3)
         .into_iter()
-        .filter_map(|chunk| {
-            let mut groups = chunk
-                .map(|single| single.chars().collect::<HashSet<char>>())
-                .collect::<Vec<_>>();
-            let first = groups.pop();
-            first
-                .map(move |chars| {
-                    chars
-                        .into_iter()
-                        .filter(move |c| groups.iter().all(|group| group.iter().any(|gc| gc == c)))
+        .map(|chunk| {
+            chunk
+                .fold(HashMap::new(), |mut acc, item| {
+                    item.chars().unique().for_each(|c| {
+                        let entry = acc.entry(c).or_insert(0);
+                        *entry = *entry + 1;
+                    });
+                    acc
                 })
-                .map(|chars| chars.map(point).collect::<Vec<_>>())
-                .map(|ver| ver.iter().sum::<u32>())
+                .iter()
+                .filter_map(|(k, v)| if *v == 3 { Some(point(*k)) } else { None })
+                .sum::<u32>()
         })
         .sum()
 }
