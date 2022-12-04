@@ -4,7 +4,7 @@ use aoc_attributes::aoc_main;
 
 static INPUT: &str = include_str!("../../input/day2.txt");
 
-#[aoc_main(year = 2022, day = 1, part1 = "part1", part2 = "part2")]
+#[aoc_main(year = 2022, day = 2, part1 = "part1", part2 = "part2")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
