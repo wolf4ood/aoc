@@ -10,6 +10,5 @@ edition = "2021"
 aoc-attributes = { workspace= true}
 itertools = { workspace= true}
 nom = { workspace= true}
-once_cell = { workspace= true}
 structopt = { workspace= true}
 anyhow = { workspace= true}
