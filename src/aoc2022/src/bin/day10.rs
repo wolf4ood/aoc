@@ -1,8 +1,4 @@
-use std::{
-    collections::{BTreeMap, VecDeque},
-    fmt::Debug,
-    str::FromStr,
-};
+use std::{collections::VecDeque, fmt::Debug, str::FromStr};
 
 use aoc_attributes::aoc_main;
 use itertools::Itertools;
@@ -85,16 +81,6 @@ impl Cpu {
             i.apply(&mut self.register);
             self.cycle += 1;
         }
-    }
-    pub fn run(&mut self) -> BTreeMap<i32, i32> {
-        let mut map = BTreeMap::new();
-        map.insert(1, 1);
-        while let Some(i) = self.ops.pop_front() {
-            i.apply(&mut self.register);
-            self.cycle += 1;
-            map.insert(self.cycle, self.register.0);
-        }
-        map
     }
 
     fn schedule(&mut self, op: Instruction) {
