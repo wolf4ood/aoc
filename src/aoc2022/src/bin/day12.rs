@@ -19,22 +19,19 @@ pub fn part1() -> usize {
 pub fn solve1(input: &str) -> usize {
     let maze = maze(input);
     let (point, _) = maze.square(Square::S).next().unwrap();
-    maze.run(point).unwrap().distance
+    maze.run(point, Square::E, |from, to| (to.gap(from) <= 1))
+        .unwrap()
+        .distance
 }
 pub fn part2() -> usize {
     solve2(INPUT)
 }
 pub fn solve2(input: &str) -> usize {
     let maze = maze(input);
-    let squares = vec![Square::S, Square::X('a')];
-
-    squares
-        .into_iter()
-        .flat_map(|square| maze.square(square))
-        .filter_map(|(start, _)| maze.run(start))
-        .map(|runner| runner.distance)
-        .min()
-        .unwrap_or_default()
+    let (point, _) = maze.square(Square::E).next().unwrap();
+    maze.run(point, Square::X('a'), |from, to| (from.gap(to) <= 1))
+        .unwrap()
+        .distance
 }
 
 #[derive(Debug)]
@@ -45,11 +42,13 @@ pub enum Direction {
     L,
 }
 
-pub struct Maze(Vec<Vec<Square>>);
+pub struct Maze {
+    grid: Vec<Vec<Square>>,
+}
 
 impl Maze {
     fn square(&self, square: Square) -> impl Iterator<Item = (Point, &Square)> {
-        self.0
+        self.grid
             .iter()
             .enumerate()
             .flat_map(|(row_idx, row)| {
@@ -61,10 +60,15 @@ impl Maze {
     }
 
     fn at(&self, point: &Point) -> &Square {
-        &self.0[point.row][point.col]
+        &self.grid[point.row][point.col]
     }
 
-    fn run(&self, start: Point) -> Option<Runner> {
+    fn run(
+        &self,
+        start: Point,
+        end: Square,
+        checker: impl Fn(&Square, &Square) -> bool,
+    ) -> Option<Runner> {
         let mut stack = VecDeque::new();
         let directions = vec![Direction::L, Direction::K, Direction::J, Direction::H];
 
@@ -75,17 +79,17 @@ impl Maze {
         while let Some(current) = stack.pop_front() {
             let current_square = self.at(&current.point);
 
-            if current_square == &Square::E {
+            if current_square == &end {
                 return Some(current);
             }
 
             for d in &directions {
-                if let Some(next) = current.next(d, self.0.len(), self.0[0].len()) {
+                if let Some(next) = current.next(d, self.grid.len(), self.grid[0].len()) {
                     let to_square = self.at(&next.point);
                     if visited.contains(next.point()) {
                         continue;
                     }
-                    if to_square.gap(&current_square) <= 1 {
+                    if checker(current_square, to_square) {
                         visited.insert(next.point().clone());
                         stack.push_back(next);
                     }
@@ -184,12 +188,12 @@ impl Square {
 }
 
 fn maze(input: &str) -> Maze {
-    Maze(
-        input
+    Maze {
+        grid: input
             .lines()
             .map(|line| line.chars().map(Square::from).collect())
             .collect(),
-    )
+    }
 }
 
 impl From<char> for Square {
